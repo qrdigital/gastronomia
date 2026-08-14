@@ -1,572 +1,3498 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dulce Capitas | Gastronomía</title>
-    <meta property="og:title" content="Dulce Capitas">
-    <meta property="og:description" content="Pedidos y productos">
-    <meta property="og:image" content="https://qrdigital.github.io/gastronomia/logogastronomia.jpg">
-    <meta property="og:url" content="https://qrdigital.github.io/gastronomia/">
-    <meta property="og:type" content="website">
+<meta charset="UTF-8">
 
-    <style>
-        /* Estilos originales mantenidos */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f7f7;
-            color: #222;
-            padding-bottom: 100px;
-        }
 
-        img {
-            display: block;
-            max-width: 100%;
-        }
 
-        button,
-        input,
-        select,
-        textarea {
-            font-family: inherit;
-        }
+<title>Dulce Capitas | Gastronomía</title>
 
-        .container {
-            width: min(1100px, 94%);
-            margin: auto;
-        }
+<meta property="og:title" content="Dulce Capitas">
 
-        /* =========================
-           HEADER
-        ========================= */
+<meta property="og:description" content="Pedidos y productos">
 
-        .hero {
-            background: #fff;
-            border-bottom: 1px solid #eee;
-        }
+<meta property="og:image" content="https://qrdigital.github.io/gastronomia/logogastronomia.jpg">
 
-        .hero-image {
-            width: 100%;
-            height: 230px;
-            object-fit: cover;
-            background: #eee;
-        }
+<meta property="og:url" content="https://qrdigital.github.io/gastronomia/">
 
-        .business-info {
-            padding: 20px 0;
-        }
+<meta property="og:type" content="website">
 
-        .business-top {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
 
-        .business-logo {
-            width: 72px;
-            height: 72px;
-            object-fit: cover;
-            border-radius: 16px;
-            border: 3px solid #fff;
-            box-shadow: 0 3px 15px rgba(0,0,0,.12);
-        }
 
-        .business-name {
-            font-size: 26px;
-            font-weight: 800;
-        }
 
-        .business-description {
-            margin-top: 5px;
-            color: #666;
-            line-height: 1.4;
-        }
+<style>
 
-        .business-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
+* {
 
-        .meta-item {
-            background: #f3f3f3;
-            border-radius: 20px;
-            padding: 8px 12px;
-            font-size: 13px;
-        }
+    box-sizing: border-box;
 
-        .header-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
+    margin: 0;
 
-        .action-button {
-            border: 0;
-            border-radius: 10px;
-            padding: 11px 15px;
-            cursor: pointer;
-            background: #eee;
-            font-weight: 600;
-        }
+    padding: 0;
 
-        .action-button.whatsapp {
-            background: #25D366;
-            color: white;
-        }
+}
 
-        /* =========================
-           CATEGORIES
-        ========================= */
 
-        .categories-wrapper {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(255,255,255,.96);
-            border-bottom: 1px solid #eee;
-        }
 
-        .categories {
-            display: flex;
-            overflow-x: auto;
-            gap: 8px;
-            padding: 12px 0;
-        }
+body {
 
-        .category-button {
-            white-space: nowrap;
-            border: 1px solid #ddd;
-            background: white;
-            border-radius: 20px;
-            padding: 9px 15px;
-            cursor: pointer;
-            font-weight: 600;
-        }
+    font-family: Arial, Helvetica, sans-serif;
 
-        .category-button.active {
-            background: #222;
-            color: white;
-            border-color: #222;
-        }
+    background: #f7f7f7;
 
-        /* =========================
-           SECTION
-        ========================= */
+    color: #222;
 
-        .section {
-            padding: 30px 0 10px;
-        }
+    padding-bottom: 100px;
 
-        .section-header {
-            margin-bottom: 18px;
-        }
+}
 
-        .section-title {
-            font-size: 24px;
-            font-weight: 800;
-        }
 
-        .section-description {
-            color: #777;
-            margin-top: 5px;
-        }
 
-        /* =========================
-           PRODUCTS
-        ========================= */
+img {
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-        }
+    display: block;
 
-        .product-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid #eee;
-            box-shadow: 0 2px 8px rgba(0,0,0,.04);
-        }
+    max-width: 100%;
 
-        .product-image-wrapper {
-            position: relative;
-        }
+}
 
-        .product-img {
-            width: 100%;
-            height: 210px;
-            object-fit: cover;
-            background: #eee;
-        }
 
-        .product-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #222;
-            color: white;
-            padding: 6px 9px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 700;
-        }
 
-        .product-content {
-            padding: 15px;
-        }
+button,
 
-        .product-name {
-            font-size: 17px;
-            font-weight: 800;
-        }
+input,
 
-        .product-description {
-            color: #777;
-            font-size: 13px;
-            line-height: 1.4;
-            margin-top: 6px;
-            min-height: 37px;
-        }
+select,
 
-        .product-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 13px;
-            gap: 10px;
-        }
+textarea {
 
-        .product-price {
-            font-size: 18px;
-            font-weight: 800;
-        }
+    font-family: inherit;
 
-        .product-old-price {
-            color: #aaa;
-            text-decoration: line-through;
-            font-size: 12px;
-            margin-left: 4px;
-        }
+}
 
-        .add-button {
-            background: #222;
-            color: white;
-            border: 0;
-            border-radius: 9px;
-            padding: 9px 13px;
-            cursor: pointer;
-            font-weight: 700;
-        }
 
-        /* =========================
-           FEATURED
-        ========================= */
 
-        .featured {
-            margin-top: 25px;
-            background: #222;
-            color: white;
-            border-radius: 18px;
-            padding: 20px;
-        }
+.container {
 
-        .featured h2 {
-            margin-bottom: 6px;
-        }
+    width: min(1100px, 94%);
 
-        .featured p {
-            color: #ccc;
-        }
+    margin: auto;
 
-        /* =========================
-           RESPONSIVE (Original)
-        ========================= */
+}
 
-        @media (max-width: 900px) {
-            .products-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
 
-        @media (max-width: 650px) {
-            .hero-image {
-                height: 180px;
-            }
 
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
+/* =========================
 
-            .product-img {
-                height: 170px;
-            }
+   HEADER
 
-            .product-content {
-                padding: 11px;
-            }
+========================= */
 
-            .product-name {
-                font-size: 15px;
-            }
 
-            .product-description {
-                font-size: 12px;
-            }
 
-            .product-bottom {
-                align-items: flex-end;
-            }
+.hero {
 
-            .product-price {
-                font-size: 15px;
-            }
+    background: #fff;
 
-            .add-button {
-                padding: 8px 10px;
-                font-size: 12px;
-            }
-        }
+    border-bottom: 1px solid #eee;
 
-        @media (max-width: 400px) {
-            .products-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+}
 
-            .product-img {
-                height: 145px;
-            }
-        }
 
-    </style>
+
+.hero-image {
+
+    width: 100%;
+
+    height: 230px;
+
+    object-fit: cover;
+
+    background: #eee;
+
+}
+
+
+
+.business-info {
+
+    padding: 20px 0;
+
+}
+
+
+
+.business-top {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+
+.business-logo {
+
+    width: 72px;
+
+    height: 72px;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+
+    border: 3px solid #fff;
+
+    box-shadow: 0 3px 15px rgba(0,0,0,.12);
+
+}
+
+
+
+.business-name {
+
+    font-size: 26px;
+
+    font-weight: 800;
+
+}
+
+
+
+.business-description {
+
+    margin-top: 5px;
+
+    color: #666;
+
+    line-height: 1.4;
+
+}
+
+
+
+.business-meta {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 15px;
+
+}
+
+
+
+.meta-item {
+
+    background: #f3f3f3;
+
+    border-radius: 20px;
+
+    padding: 8px 12px;
+
+    font-size: 13px;
+
+}
+
+
+
+.header-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+}
+
+
+
+.action-button {
+
+    border: 0;
+
+    border-radius: 10px;
+
+    padding: 11px 15px;
+
+    cursor: pointer;
+
+    background: #eee;
+
+    font-weight: 600;
+
+}
+
+
+
+.action-button.whatsapp {
+
+    background: #25D366;
+
+    color: white;
+
+}
+
+
+
+/* =========================
+
+   CATEGORIES
+
+========================= */
+
+
+
+.categories-wrapper {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 50;
+
+    background: rgba(255,255,255,.96);
+
+    border-bottom: 1px solid #eee;
+
+}
+
+
+
+.categories {
+
+    display: flex;
+
+    overflow-x: auto;
+
+    gap: 8px;
+
+    padding: 12px 0;
+
+}
+
+
+
+.category-button {
+
+    white-space: nowrap;
+
+    border: 1px solid #ddd;
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 9px 15px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+}
+
+
+
+.category-button.active {
+
+    background: #222;
+
+    color: white;
+
+    border-color: #222;
+
+}
+
+
+
+/* =========================
+
+   SECTION
+
+========================= */
+
+
+
+.section {
+
+    padding: 30px 0 10px;
+
+}
+
+
+
+.section-header {
+
+    margin-bottom: 18px;
+
+}
+
+
+
+.section-title {
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+}
+
+
+
+.section-description {
+
+    color: #777;
+
+    margin-top: 5px;
+
+}
+
+
+
+/* =========================
+
+   PRODUCTS
+
+========================= */
+
+
+
+.products-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+}
+
+
+
+.product-card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    border: 1px solid #eee;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+
+}
+
+
+
+.product-image-wrapper {
+
+    position: relative;
+
+}
+
+
+
+.product-img {
+
+    width: 100%;
+
+    height: 210px;
+
+    object-fit: cover;
+
+    background: #eee;
+
+}
+
+
+
+.product-badge {
+
+    position: absolute;
+
+    top: 10px;
+
+    left: 10px;
+
+    background: #222;
+
+    color: white;
+
+    padding: 6px 9px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+
+.product-content {
+
+    padding: 15px;
+
+}
+
+
+
+.product-name {
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+}
+
+
+
+.product-description {
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+
+    margin-top: 6px;
+
+    min-height: 37px;
+
+}
+
+
+
+.product-bottom {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 13px;
+
+    gap: 10px;
+
+}
+
+
+
+.product-price {
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+}
+
+
+
+.product-old-price {
+
+    color: #aaa;
+
+    text-decoration: line-through;
+
+    font-size: 12px;
+
+    margin-left: 4px;
+
+}
+
+
+
+.add-button {
+
+    background: #222;
+
+    color: white;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    padding: 9px 13px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+}
+
+
+
+/* =========================
+
+   FEATURED
+
+========================= */
+
+
+
+.featured {
+
+    margin-top: 25px;
+
+    background: #222;
+
+    color: white;
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+}
+
+
+
+.featured h2 {
+
+    margin-bottom: 6px;
+
+}
+
+
+
+.featured p {
+
+    color: #ccc;
+
+}
+
+
+
+/* =========================
+
+   FLOATING CART
+
+========================= */
+
+
+
+.cart-floating {
+
+    position: fixed;
+
+    bottom: 18px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(600px, 92%);
+
+    background: #222;
+
+    color: white;
+
+    border-radius: 15px;
+
+    padding: 14px 18px;
+
+    z-index: 100;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow: 0 8px 30px rgba(0,0,0,.25);
+
+    cursor: pointer;
+
+}
+
+
+
+.cart-info strong {
+
+    display: block;
+
+}
+
+
+
+.cart-info span {
+
+    font-size: 13px;
+
+    color: #ccc;
+
+}
+
+
+
+.cart-total {
+
+    font-weight: 800;
+
+}
+
+
+
+/* =========================
+
+   MODAL
+
+========================= */
+
+
+
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.55);
+
+    z-index: 200;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 15px;
+
+}
+
+
+
+.modal-overlay.active {
+
+    display: flex;
+
+}
+
+
+
+.modal {
+
+    background: white;
+
+    width: min(650px, 100%);
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+}
+
+
+
+.modal-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+.close-button {
+
+    width: 35px;
+
+    height: 35px;
+
+    border-radius: 50%;
+
+    border: 0;
+
+    background: #eee;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+}
+
+
+
+.modal-product {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+.modal-product img {
+
+    width: 100px;
+
+    height: 100px;
+
+    border-radius: 12px;
+
+    object-fit: cover;
+
+}
+
+
+
+.option-group {
+
+    margin-top: 18px;
+
+}
+
+
+
+.option-title {
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+
+}
+
+
+
+.option {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border: 1px solid #ddd;
+
+    padding: 10px 12px;
+
+    border-radius: 10px;
+
+    margin-bottom: 7px;
+
+    cursor: pointer;
+
+}
+
+
+
+.option input {
+
+    margin-right: 8px;
+
+}
+
+
+
+.option-left {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+
+.quantity-selector {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 15px;
+
+}
+
+
+
+.quantity-selector button {
+
+    width: 34px;
+
+    height: 34px;
+
+    border: 0;
+
+    background: #eee;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+}
+
+
+
+.quantity-number {
+
+    font-weight: 800;
+
+}
+
+
+
+.modal-add-button {
+
+    width: 100%;
+
+    background: #222;
+
+    color: white;
+
+    border: 0;
+
+    border-radius: 11px;
+
+    padding: 14px;
+
+    margin-top: 20px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+}
+
+
+
+/* =========================
+
+   CART
+
+========================= */
+
+
+
+.cart-item {
+
+    border-bottom: 1px solid #eee;
+
+    padding: 15px 0;
+
+}
+
+
+
+.cart-item-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+}
+
+
+
+.cart-item-name {
+
+    font-weight: 800;
+
+}
+
+
+
+.cart-item-details {
+
+    font-size: 12px;
+
+    color: #777;
+
+    margin-top: 5px;
+
+}
+
+
+
+.cart-item-actions {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 10px;
+
+}
+
+
+
+.mini-quantity {
+
+    display: flex;
+
+    gap: 8px;
+
+    align-items: center;
+
+}
+
+
+
+.mini-quantity button {
+
+    width: 28px;
+
+    height: 28px;
+
+    border: 0;
+
+    border-radius: 6px;
+
+    background: #eee;
+
+    cursor: pointer;
+
+}
+
+
+
+.remove-item {
+
+    border: 0;
+
+    background: transparent;
+
+    color: #c00;
+
+    cursor: pointer;
+
+}
+
+
+
+.summary {
+
+    margin-top: 20px;
+
+    border-top: 1px solid #eee;
+
+    padding-top: 15px;
+
+}
+
+
+
+.summary-line {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+}
+
+
+
+.summary-total {
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    margin-top: 10px;
+
+}
+
+
+
+/* =========================
+
+   FORMS
+
+========================= */
+
+
+
+.form-section {
+
+    margin-top: 25px;
+
+}
+
+
+
+.form-title {
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    margin-bottom: 12px;
+
+}
+
+
+
+.form-group {
+
+    margin-bottom: 12px;
+
+}
+
+
+
+.form-group label {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+
+}
+
+
+
+.form-group input,
+
+.form-group select,
+
+.form-group textarea {
+
+    width: 100%;
+
+    border: 1px solid #ddd;
+
+    border-radius: 9px;
+
+    padding: 11px;
+
+    outline: none;
+
+}
+
+
+
+.form-group textarea {
+
+    min-height: 80px;
+
+    resize: vertical;
+
+}
+
+
+
+.delivery-options {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+}
+
+
+
+.delivery-option {
+
+    border: 1px solid #ddd;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+}
+
+
+
+.delivery-option input {
+
+    margin-right: 6px;
+
+}
+
+
+
+.location-box {
+
+    background: #f7f7f7;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    margin-top: 12px;
+
+}
+
+
+
+.maps-button {
+
+    display: inline-block;
+
+    margin-top: 8px;
+
+    background: #fff;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    padding: 8px 10px;
+
+    color: #222;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+
+.whatsapp-order {
+
+    width: 100%;
+
+    background: #25D366;
+
+    color: white;
+
+    border: 0;
+
+    border-radius: 11px;
+
+    padding: 15px;
+
+    margin-top: 20px;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+}
+
+
+
+/* =========================
+
+   RESPONSIVE
+
+========================= */
+
+
+
+@media (max-width: 900px) {
+
+    .products-grid {
+
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+
+}
+
+
+
+@media (max-width: 650px) {
+
+
+
+    .hero-image {
+
+        height: 180px;
+
+    }
+
+
+
+    .products-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 10px;
+
+    }
+
+
+
+    .product-img {
+
+        height: 170px;
+
+    }
+
+
+
+    .product-content {
+
+        padding: 11px;
+
+    }
+
+
+
+    .product-name {
+
+        font-size: 15px;
+
+    }
+
+
+
+    .product-description {
+
+        font-size: 12px;
+
+    }
+
+
+
+    .product-bottom {
+
+        align-items: flex-end;
+
+    }
+
+
+
+    .product-price {
+
+        font-size: 15px;
+
+    }
+
+
+
+    .add-button {
+
+        padding: 8px 10px;
+
+        font-size: 12px;
+
+    }
+
+
+
+    .delivery-options {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+
+@media (max-width: 400px) {
+
+    .products-grid {
+
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+
+
+    .product-img {
+
+        height: 145px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   VENTALISTA — REDISEÑO PREMIUM / MOBILE FIRST
+   ========================================================== */
+:root{
+  --ink:#171717;
+  --muted:#6f6f6f;
+  --line:#e9e9e9;
+  --soft:#f6f6f4;
+  --card:#ffffff;
+  --accent:#171717;
+  --wa:#1fa855;
+  --radius:18px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:#f5f5f3;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font:inherit;}
+button{-webkit-tap-highlight-color:transparent;}
+.container{width:min(1180px,calc(100% - 40px));}
+
+.hero{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.hero-image{
+  height:clamp(220px,31vw,360px);
+  object-fit:cover;
+  cursor:zoom-in;
+  transition:filter .25s ease,transform .35s ease;
+}
+.hero-image:hover{filter:brightness(.97);}
+.business-info{padding:24px 0 28px;}
+.business-top{gap:16px;}
+.business-logo{
+  width:76px;height:76px;border-radius:20px;
+  border:4px solid #fff;
+  box-shadow:0 8px 25px rgba(0,0,0,.10);
+}
+.business-name{font-size:clamp(24px,3vw,34px);letter-spacing:-.03em;line-height:1.05;}
+.business-description{font-size:15px;color:#666;max-width:620px;}
+.business-meta{gap:8px;margin-top:17px;}
+.meta-item{
+  background:#f5f5f3;border:1px solid #ecece8;
+  border-radius:999px;padding:8px 12px;font-size:12px;color:#555;
+}
+.header-actions{gap:9px;margin-top:16px;}
+.action-button{
+  border:1px solid #ddd;background:#fff;border-radius:11px;
+  padding:11px 15px;font-size:13px;transition:.2s ease;
+}
+.action-button:hover{transform:translateY(-1px);border-color:#bbb;}
+.action-button.whatsapp{background:var(--wa);border-color:var(--wa);}
+
+.categories-wrapper{
+  background:rgba(255,255,255,.90);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+.categories{gap:7px;padding:12px 0;scrollbar-width:none;}
+.categories::-webkit-scrollbar{display:none;}
+.category-button{
+  border:1px solid #e1e1de;background:#fff;border-radius:999px;
+  padding:9px 15px;font-size:13px;font-weight:650;color:#4c4c4c;
+  transition:.2s ease;
+}
+.category-button:hover{border-color:#aaa;}
+.category-button.active{background:#171717;border-color:#171717;color:#fff;}
+
+.section{padding:36px 0 14px;}
+.section-header{margin-bottom:20px;}
+.section-title{font-size:clamp(24px,3vw,30px);letter-spacing:-.035em;}
+.section-description{color:#777;font-size:14px;margin-top:6px;}
+
+.featured{
+  margin-top:30px;border-radius:22px;padding:24px 26px;
+  background:#171717;color:#fff;box-shadow:0 14px 35px rgba(0,0,0,.10);
+}
+.featured h2{font-size:21px;letter-spacing:-.02em;}
+.featured p{color:#bdbdbd;font-size:14px;}
+
+.products-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+.product-card{
+  border:1px solid #e7e7e4;border-radius:18px;
+  box-shadow:0 2px 10px rgba(0,0,0,.025);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.08);border-color:#ddd;}
+.product-image-wrapper{overflow:hidden;}
+.product-img{
+  height:235px;cursor:zoom-in;
+  transition:transform .45s cubic-bezier(.2,.7,.2,1),filter .25s ease;
+}
+.product-card:hover .product-img{transform:scale(1.035);}
+.product-badge{
+  top:12px;left:12px;border-radius:999px;padding:6px 9px;
+  background:rgba(17,17,17,.88);font-size:10px;letter-spacing:.05em;
+  backdrop-filter:blur(5px);
+}
+.product-content{padding:16px;}
+.product-name{font-size:16px;letter-spacing:-.015em;}
+.product-description{font-size:13px;color:#777;line-height:1.45;min-height:38px;}
+.product-bottom{margin-top:14px;}
+.product-price{font-size:18px;letter-spacing:-.02em;}
+.add-button{
+  border-radius:10px;padding:9px 12px;background:#171717;
+  transition:transform .15s ease,background .15s ease;
+}
+.add-button:hover{background:#333;transform:translateY(-1px);}
+
+.cart-floating{
+  width:min(620px,calc(100% - 32px));
+  bottom:18px;border-radius:16px;padding:13px 16px;
+  box-shadow:0 14px 38px rgba(0,0,0,.23);
+}
+.cart-info strong{font-size:14px;}
+.cart-info span{font-size:12px;}
+.cart-total{font-size:14px;}
+
+.modal-overlay{background:rgba(8,8,8,.68);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);}
+.modal{
+  width:min(680px,100%);border-radius:22px;padding:24px;
+  box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+.modal-header{margin-bottom:18px;}
+.close-button{width:38px;height:38px;background:#f2f2f0;font-size:19px;}
+.modal-product{align-items:flex-start;}
+.modal-product img{width:118px;height:118px;border-radius:14px;cursor:zoom-in;}
+.option{border:1px solid #e1e1de;border-radius:11px;padding:11px 13px;transition:.15s ease;}
+.option:hover{border-color:#aaa;background:#fafafa;}
+.option:has(input:checked){border-color:#171717;background:#fafafa;}
+.modal-add-button{border-radius:12px;background:#171717;}
+.form-group input,.form-group select,.form-group textarea{border-color:#dededb;background:#fff;}
+.delivery-option{border-color:#dededb;border-radius:11px;}
+.whatsapp-order{border-radius:12px;background:var(--wa);}
+
+/* Visor de imágenes */
+.image-lightbox{
+  position:fixed;inset:0;z-index:1000;display:none;
+  align-items:center;justify-content:center;padding:22px;
+  background:rgba(0,0,0,.94);cursor:zoom-out;
+}
+.image-lightbox.active{display:flex;animation:lbIn .18s ease-out;}
+.image-lightbox img{
+  max-width:min(94vw,1200px);max-height:90vh;width:auto;height:auto;
+  object-fit:contain;border-radius:10px;box-shadow:0 20px 70px rgba(0,0,0,.45);
+  cursor:default;user-select:none;
+}
+.image-lightbox-close{
+  position:absolute;top:16px;right:18px;width:44px;height:44px;border:0;
+  border-radius:50%;background:rgba(255,255,255,.13);color:#fff;font-size:28px;
+  line-height:1;cursor:pointer;display:grid;place-items:center;
+}
+.image-lightbox-hint{
+  position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.65);font-size:12px;pointer-events:none;
+}
+body.lightbox-open{overflow:hidden;}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+
+@media (max-width:900px){
+  .products-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+@media (max-width:650px){
+  .container{width:calc(100% - 24px);}
+  .hero-image{height:205px;}
+  .business-info{padding:18px 0 20px;}
+  .business-logo{width:64px;height:64px;border-radius:17px;}
+  .business-top{gap:12px;}
+  .business-name{font-size:23px;}
+  .business-description{font-size:13px;}
+  .business-meta{margin-top:13px;}
+  .meta-item{font-size:11px;padding:7px 10px;}
+  .header-actions{margin-top:13px;}
+  .action-button{flex:1;padding:11px 10px;font-size:12px;}
+  .categories{padding:10px 0;}
+  .category-button{padding:8px 13px;font-size:12px;}
+  .section{padding-top:28px;}
+  .featured{margin-top:22px;border-radius:18px;padding:19px;}
+  .featured h2{font-size:18px;}
+  .featured p{font-size:12px;}
+  .products-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;}
+  .product-img{height:190px;}
+  .product-content{padding:12px;}
+  .product-name{font-size:14px;}
+  .product-description{font-size:11px;min-height:34px;}
+  .product-price{font-size:15px;}
+  .add-button{padding:8px 9px;font-size:11px;}
+  .product-badge{top:8px;left:8px;font-size:9px;padding:5px 7px;}
+  .cart-floating{bottom:12px;width:calc(100% - 24px);}
+  .modal-overlay{padding:0;align-items:flex-end;}
+  .modal{
+    width:100%;max-height:92vh;border-radius:22px 22px 0 0;
+    padding:19px 16px calc(20px + env(safe-area-inset-bottom));
+  }
+  .modal-product img{width:96px;height:96px;}
+  .image-lightbox{padding:10px;}
+  .image-lightbox img{max-width:96vw;max-height:82vh;border-radius:6px;}
+  .image-lightbox-close{top:12px;right:12px;}
+}
+@media (max-width:400px){
+  .product-img{height:165px;}
+  .product-content{padding:10px;}
+  .product-description{display:none;}
+}
+
+</style>
+
 </head>
+
+
 
 <body>
 
+
+
 <!-- ======================================================
+
      CABECERA
+
 ====================================================== -->
+
+
 
 <header class="hero">
 
-    <!-- Imagen principal - Formato corregido -->
-    <img src="https://qrdigital.github.io/dulcecapitas/imagengastro1.jpg" alt="Portada Dulce Capitas" class="hero-image">
+
+
+    <!-- Imagen principal -->
+
+    <img src="https://qrdigital.github.io/dulcecapitas/imagengastro1.jpg" alt="Dulce Capitas" class="hero-image">
+
+
 
     <div class="container business-info">
 
+
+
         <div class="business-top">
 
-            <!-- Logo - Formato corregido -->
+
+
             <img src="https://qrdigital.github.io/dulcecapitas/logogastronomia.jpg" alt="Logo Dulce Capitas" class="business-logo">
 
+
+
             <div>
+
                 <h1 class="business-name">Dulce Capitas</h1>
+
+
+
                 <p class="business-description">
+
                     Tortas, postres y dulces preparados con cariño.
+
                 </p>
+
             </div>
 
+
+
         </div>
+
+
 
         <div class="business-meta">
-            <div class="meta-item">🕐 Lun - Sáb 10:00 - 20:00</div>
-            <div class="meta-item">📍 Lima</div>
-            <div class="meta-item">🚚 Delivery</div>
+
+
+
+            <div class="meta-item">
+
+                🕐 Lun - Sáb 10:00 - 20:00
+
+            </div>
+
+
+
+            <div class="meta-item">
+
+                📍 Lima
+
+            </div>
+
+
+
+            <div class="meta-item">
+
+                🚚 Delivery
+
+            </div>
+
+
+
         </div>
+
+
 
         <div class="header-actions">
-            <button class="action-button" onclick="openLocation()">📍 Cómo llegar</button>
-            <button class="action-button whatsapp" onclick="contactWhatsApp()">WhatsApp</button>
+
+
+
+            <button
+
+                class="action-button"
+
+                onclick="openLocation()">
+
+                📍 Cómo llegar
+
+            </button>
+
+
+
+            <button
+
+                class="action-button whatsapp"
+
+                onclick="contactWhatsApp()">
+
+                WhatsApp
+
+            </button>
+
+
+
         </div>
 
+
+
     </div>
+
+
 
 </header>
 
+
+
+
+
 <!-- ======================================================
+
      CATEGORÍAS
+
 ====================================================== -->
 
+
+
 <div class="categories-wrapper">
+
+
+
     <div class="container">
+
+
+
         <div class="categories">
-            <button class="category-button active" onclick="filterCategory('todos', this)">Todos</button>
-            <button class="category-button" onclick="filterCategory('tortas', this)">Tortas</button>
-            <button class="category-button" onclick="filterCategory('postres', this)">Postres</button>
-            <button class="category-button" onclick="filterCategory('combos', this)">Combos</button>
-            <button class="category-button" onclick="filterCategory('bebidas', this)">Bebidas</button>
+
+
+
+            <button
+
+                class="category-button active"
+
+                onclick="filterCategory('todos', this)">
+
+                Todos
+
+            </button>
+
+
+
+            <button
+
+                class="category-button"
+
+                onclick="filterCategory('tortas', this)">
+
+                Tortas
+
+            </button>
+
+
+
+            <button
+
+                class="category-button"
+
+                onclick="filterCategory('postres', this)">
+
+                Postres
+
+            </button>
+
+
+
+            <button
+
+                class="category-button"
+
+                onclick="filterCategory('combos', this)">
+
+                Combos
+
+            </button>
+
+
+
+            <button
+
+                class="category-button"
+
+                onclick="filterCategory('bebidas', this)">
+
+                Bebidas
+
+            </button>
+
+
+
         </div>
+
+
+
     </div>
+
+
+
 </div>
+
+
+
+
 
 <main class="container">
 
+
+
 <!-- ======================================================
+
      DESTACADOS
+
 ====================================================== -->
+
+
 
 <section class="featured">
+
+
+
     <h2>Los favoritos</h2>
-    <p>Descubre nuestros productos más pedidos.</p>
+
+
+
+    <p>
+
+        Descubre nuestros productos más pedidos.
+
+    </p>
+
+
+
 </section>
 
+
+
+
+
 <!-- ======================================================
+
      CATÁLOGO
+
 ====================================================== -->
+
+
 
 <section class="section">
 
+
+
     <div class="section-header">
-        <h2 class="section-title">Nuestros productos</h2>
-        <p class="section-description">Elige tus productos y arma tu pedido.</p>
+
+
+
+        <h2 class="section-title">
+
+            Nuestros productos
+
+        </h2>
+
+
+
+        <p class="section-description">
+
+            Elige tus productos y arma tu pedido.
+
+        </p>
+
+
+
     </div>
+
+
+
+
 
     <div class="products-grid" id="productsGrid">
 
+
+
+
+
         <!-- PRODUCTO 1 -->
-        <article class="product-card" data-category="tortas" data-id="1" data-name="Torta de Chocolate" data-price="45">
+
+
+
+        <article
+
+            class="product-card"
+
+            data-category="tortas"
+
+            data-id="1"
+
+            data-name="Torta de Chocolate"
+
+            data-price="45">
+
+
+
             <div class="product-image-wrapper">
-                <!-- Imagen corregida -->
+
+
+
                 <img src="https://qrdigital.github.io/dulcecapitas/imagengastro2.jpg" alt="Torta de Chocolate" class="product-img">
-                <span class="product-badge">MÁS VENDIDO</span>
+
+
+
+                <span class="product-badge">
+
+                    MÁS VENDIDO
+
+                </span>
+
+
+
             </div>
+
+
+
             <div class="product-content">
-                <h3 class="product-name">Torta de Chocolate</h3>
-                <p class="product-description">Bizcocho de chocolate con relleno y cobertura.</p>
+
+
+
+                <h3 class="product-name">
+
+                    Torta de Chocolate
+
+                </h3>
+
+
+
+                <p class="product-description">
+
+                    Bizcocho de chocolate con relleno y cobertura.
+
+                </p>
+
+
+
                 <div class="product-bottom">
-                    <div class="product-price">S/ 45.00</div>
-                    <button class="add-button" onclick="openProduct(1)">+ Agregar</button>
+
+
+
+                    <div class="product-price">
+
+                        S/ 45.00
+
+                    </div>
+
+
+
+                    <button
+
+                        class="add-button"
+
+                        onclick="openProduct(1)">
+
+                        \+ Agregar
+
+                    </button>
+
+
+
                 </div>
+
+
+
             </div>
+
+
+
         </article>
+
+
+
+
 
         <!-- PRODUCTO 2 -->
-        <article class="product-card" data-category="tortas" data-id="2" data-name="Torta de Fresa" data-price="48">
+
+
+
+        <article
+
+            class="product-card"
+
+            data-category="tortas"
+
+            data-id="2"
+
+            data-name="Torta de Fresa"
+
+            data-price="48">
+
+
+
             <div class="product-image-wrapper">
-                <!-- Imagen corregida -->
+
+
+
                 <img src="https://qrdigital.github.io/dulcecapitas/imagengastro3.jpg" alt="Torta de Fresa" class="product-img">
+
+
+
             </div>
+
+
+
             <div class="product-content">
-                <h3 class="product-name">Torta de Fresa</h3>
-                <p class="product-description">Bizcocho suave, crema y fresas frescas.</p>
+
+
+
+                <h3 class="product-name">
+
+                    Torta de Fresa
+
+                </h3>
+
+
+
+                <p class="product-description">
+
+                    Bizcocho suave, crema y fresas frescas.
+
+                </p>
+
+
+
                 <div class="product-bottom">
-                    <div class="product-price">S/ 48.00</div>
-                    <button class="add-button" onclick="openProduct(2)">+ Agregar</button>
+
+
+
+                    <div class="product-price">
+
+                        S/ 48.00
+
+                    </div>
+
+
+
+                    <button
+
+                        class="add-button"
+
+                        onclick="openProduct(2)">
+
+                        \+ Agregar
+
+                    </button>
+
+
+
                 </div>
+
+
+
             </div>
+
+
+
         </article>
+
+
+
+
 
         <!-- PRODUCTO 3 -->
-        <article class="product-card" data-category="postres" data-id="3" data-name="Cheesecake de Fresa" data-price="32">
+
+
+
+        <article
+
+            class="product-card"
+
+            data-category="postres"
+
+            data-id="3"
+
+            data-name="Cheesecake de Fresa"
+
+            data-price="32">
+
+
+
             <div class="product-image-wrapper">
-                <!-- Imagen corregida -->
-                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro4.jpg" alt="Cheesecake de Fresa" class="product-img">
+
+
+
+                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro4.jpg" alt="Cheesecake" class="product-img">
+
+
+
             </div>
+
+
+
             <div class="product-content">
-                <h3 class="product-name">Cheesecake de Fresa</h3>
-                <p class="product-description">Cheesecake cremoso con topping de fresa.</p>
+
+
+
+                <h3 class="product-name">
+
+                    Cheesecake de Fresa
+
+                </h3>
+
+
+
+                <p class="product-description">
+
+                    Cheesecake cremoso con topping de fresa.
+
+                </p>
+
+
+
                 <div class="product-bottom">
-                    <div class="product-price">S/ 32.00</div>
-                    <button class="add-button" onclick="openProduct(3)">+ Agregar</button>
+
+
+
+                    <div class="product-price">
+
+                        S/ 32.00
+
+                    </div>
+
+
+
+                    <button
+
+                        class="add-button"
+
+                        onclick="openProduct(3)">
+
+                        \+ Agregar
+
+                    </button>
+
+
+
                 </div>
+
+
+
             </div>
+
+
+
         </article>
+
+
+
+
 
         <!-- PRODUCTO 4 -->
-        <article class="product-card" data-category="postres" data-id="4" data-name="Brownie" data-price="12">
+
+
+
+        <article
+
+            class="product-card"
+
+            data-category="postres"
+
+            data-id="4"
+
+            data-name="Brownie"
+
+            data-price="12">
+
+
+
             <div class="product-image-wrapper">
-                <!-- Imagen corregida -->
-                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro5.jpg" alt="Brownie Clásico" class="product-img">
+
+
+
+                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro5.jpg" alt="Brownie" class="product-img">
+
+
+
             </div>
+
+
+
             <div class="product-content">
-                <h3 class="product-name">Brownie</h3>
-                <p class="product-description">Brownie de chocolate con nueces.</p>
+
+
+
+                <h3 class="product-name">
+
+                    Brownie
+
+                </h3>
+
+
+
+                <p class="product-description">
+
+                    Brownie de chocolate con nueces.
+
+                </p>
+
+
+
                 <div class="product-bottom">
-                    <div class="product-price">S/ 12.00</div>
-                    <button class="add-button" onclick="openProduct(4)">+ Agregar</button>
+
+
+
+                    <div class="product-price">
+
+                        S/ 12.00
+
+                    </div>
+
+
+
+                    <button
+
+                        class="add-button"
+
+                        onclick="openProduct(4)">
+
+                        \+ Agregar
+
+                    </button>
+
+
+
                 </div>
+
+
+
             </div>
+
+
+
         </article>
+
+
+
+
 
         <!-- PRODUCTO 5 -->
-        <article class="product-card" data-category="combos" data-id="5" data-name="Box Dulce" data-price="35">
+
+
+
+        <article
+
+            class="product-card"
+
+            data-category="combos"
+
+            data-id="5"
+
+            data-name="Box Dulce"
+
+            data-price="35">
+
+
+
             <div class="product-image-wrapper">
-                <!-- Imagen corregida -->
-                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro6.jpg" alt="Box Dulce de regalo" class="product-img">
-                <span class="product-badge">OFERTA</span>
+
+
+
+                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro6.jpg" alt="Box Dulce" class="product-img">
+
+
+
+                <span class="product-badge">
+
+                    OFERTA
+
+                </span>
+
+
+
             </div>
+
+
+
             <div class="product-content">
-                <h3 class="product-name">Box Dulce</h3>
-                <p class="product-description">Selección de nuestros mejores postres.</p>
+
+
+
+                <h3 class="product-name">
+
+                    Box Dulce
+
+                </h3>
+
+
+
+                <p class="product-description">
+
+                    Selección de nuestros mejores postres.
+
+                </p>
+
+
+
                 <div class="product-bottom">
-                    <div class="product-price">S/ 35.00</div>
-                    <button class="add-button" onclick="openProduct(5)">+ Agregar</button>
+
+
+
+                    <div class="product-price">
+
+                        S/ 35.00
+
+                    </div>
+
+
+
+                    <button
+
+                        class="add-button"
+
+                        onclick="openProduct(5)">
+
+                        \+ Agregar
+
+                    </button>
+
+
+
                 </div>
+
+
+
             </div>
+
+
+
         </article>
+
+
+
+
 
         <!-- PRODUCTO 6 -->
-        <article class="product-card" data-category="combos" data-id="6" data-name="Combo Cumpleaños" data-price="65">
+
+
+
+        <article
+
+            class="product-card"
+
+            data-category="combos"
+
+            data-id="6"
+
+            data-name="Combo Cumpleaños"
+
+            data-price="65">
+
+
+
             <div class="product-image-wrapper">
-                <!-- Imagen corregida -->
-                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro7.jpg" alt="Combo Cumpleaños Completo" class="product-img">
+
+
+
+                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro7.jpg" alt="Combo Cumpleaños" class="product-img">
+
+
+
             </div>
+
+
+
             <div class="product-content">
-                <h3 class="product-name">Combo Cumpleaños</h3>
-                <p class="product-description">Torta + cupcakes + decoración.</p>
+
+
+
+                <h3 class="product-name">
+
+                    Combo Cumpleaños
+
+                </h3>
+
+
+
+                <p class="product-description">
+
+                    Torta + cupcakes + decoración.
+
+                </p>
+
+
+
                 <div class="product-bottom">
-                    <div class="product-price">S/ 65.00</div>
-                    <button class="add-button" onclick="openProduct(6)">+ Agregar</button>
+
+
+
+                    <div class="product-price">
+
+                        S/ 65.00
+
+                    </div>
+
+
+
+                    <button
+
+                        class="add-button"
+
+                        onclick="openProduct(6)">
+
+                        \+ Agregar
+
+                    </button>
+
+
+
                 </div>
+
+
+
             </div>
+
+
+
         </article>
+
+
+
+
 
         <!-- PRODUCTO 7 -->
-        <article class="product-card" data-category="bebidas" data-id="7" data-name="Café Americano" data-price="7">
+
+
+
+        <article
+
+            class="product-card"
+
+            data-category="bebidas"
+
+            data-id="7"
+
+            data-name="Café Americano"
+
+            data-price="7">
+
+
+
             <div class="product-image-wrapper">
-                <!-- Imagen corregida -->
-                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro8.jpg" alt="Café Americano Caliente" class="product-img">
+
+
+
+                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro8.jpg" alt="Café" class="product-img">
+
+
+
             </div>
+
+
+
             <div class="product-content">
-                <h3 class="product-name">Café Americano</h3>
-                <p class="product-description">Café recién preparado.</p>
+
+
+
+                <h3 class="product-name">
+
+                    Café Americano
+
+                </h3>
+
+
+
+                <p class="product-description">
+
+                    Café recién preparado.
+
+                </p>
+
+
+
                 <div class="product-bottom">
-                    <div class="product-price">S/ 7.00</div>
-                    <button class="add-button" onclick="openProduct(7)">+ Agregar</button>
+
+
+
+                    <div class="product-price">
+
+                        S/ 7.00
+
+                    </div>
+
+
+
+                    <button
+
+                        class="add-button"
+
+                        onclick="openProduct(7)">
+
+                        \+ Agregar
+
+                    </button>
+
+
+
                 </div>
+
+
+
             </div>
+
+
+
         </article>
 
-        <!-- PRODUCTO 8 (Completado) -->
-        <article class="product-card" data-category="bebidas" data-id="8" data-name="Chocolate Caliente" data-price="10">
+
+
+
+
+        <!-- PRODUCTO 8 -->
+
+
+
+        <article
+
+            class="product-card"
+
+            data-category="bebidas"
+
+            data-id="8"
+
+            data-name="Chocolate Caliente"
+
+            data-price="10">
+
+
+
             <div class="product-image-wrapper">
-                <!-- Imagen corregida -->
-                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro9.jpg" alt="Chocolate Caliente con espuma" class="product-img">
+
+
+
+                <img src="https://qrdigital.github.io/dulcecapitas/imagengastro9.jpg" alt="Chocolate" class="product-img">
+
+
+
             </div>
+
+
+
             <div class="product-content">
-                <h3 class="product-name">Chocolate Caliente</h3>
-                <p class="product-description">Chocolate de la casa con leche.</p>
+
+
+
+                <h3 class="product-name">
+
+                    Chocolate Caliente
+
+                </h3>
+
+
+
+                <p class="product-description">
+
+                    Chocolate caliente cremoso.
+
+                </p>
+
+
+
                 <div class="product-bottom">
-                    <div class="product-price">S/ 10.00</div>
-                    <button class="add-button" onclick="openProduct(8)">+ Agregar</button>
+
+
+
+                    <div class="product-price">
+
+                        S/ 10.00
+
+                    </div>
+
+
+
+                    <button
+
+                        class="add-button"
+
+                        onclick="openProduct(8)">
+
+                        \+ Agregar
+
+                    </button>
+
+
+
                 </div>
+
+
+
             </div>
+
+
+
         </article>
+
+
+
+
 
     </div>
+
+
+
 </section>
+
+
 
 </main>
 
+
+
+
+
+<!-- ======================================================
+
+     CARRITO FLOTANTE
+
+====================================================== -->
+
+
+
+<div
+
+    class="cart-floating"
+
+    onclick="openCart()">
+
+
+
+    <div class="cart-info">
+
+
+
+        <strong>
+
+            Mi pedido
+
+        </strong>
+
+
+
+        <span id="cartCount">
+
+            0 productos
+
+        </span>
+
+
+
+    </div>
+
+
+
+    <div
+
+        class="cart-total"
+
+        id="floatingTotal">
+
+        S/ 0.00
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+<!-- ======================================================
+
+     MODAL PRODUCTO
+
+====================================================== -->
+
+
+
+<div
+
+    class="modal-overlay"
+
+    id="productModal">
+
+
+
+    <div class="modal">
+
+
+
+        <div class="modal-header">
+
+
+
+            <h2 id="modalProductName">
+
+                Producto
+
+            </h2>
+
+
+
+            <button
+
+                class="close-button"
+
+                onclick="closeModal('productModal')">
+
+                ×
+
+            </button>
+
+
+
+        </div>
+
+
+
+        <div class="modal-product">
+
+
+
+            <img src="" alt="" id="modalProductImage">
+
+
+
+            <div>
+
+
+
+                <p
+
+                    id="modalProductDescription"
+
+                    style="color:#777; line-height:1.5;">
+
+                </p>
+
+
+
+                <strong
+
+                    id="modalProductPrice"
+
+                    style="display:block;margin-top:10px;font-size:20px;">
+
+                </strong>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+        <!-- VARIANTE -->
+
+
+
+        <div class="option-group">
+
+
+
+            <div class="option-title">
+
+                Tamaño
+
+            </div>
+
+
+
+            <label class="option">
+
+
+
+                <span class="option-left">
+
+                    <input
+
+                        type="radio"
+
+                        name="size"
+
+                        value="Pequeño"
+
+                        data-extra="0"
+
+                        checked>
+
+                    Pequeño
+
+                </span>
+
+
+
+                <span>
+
+                    Incluido
+
+                </span>
+
+
+
+            </label>
+
+
+
+            <label class="option">
+
+
+
+                <span class="option-left">
+
+                    <input
+
+                        type="radio"
+
+                        name="size"
+
+                        value="Mediano"
+
+                        data-extra="8">
+
+                    Mediano
+
+                </span>
+
+
+
+                <span>
+
+                    \+ S/ 8
+
+                </span>
+
+
+
+            </label>
+
+
+
+            <label class="option">
+
+
+
+                <span class="option-left">
+
+                    <input
+
+                        type="radio"
+
+                        name="size"
+
+                        value="Grande"
+
+                        data-extra="15">
+
+                    Grande
+
+                </span>
+
+
+
+                <span>
+
+                    \+ S/ 15
+
+                </span>
+
+
+
+            </label>
+
+
+
+        </div>
+
+
+
+
+
+        <!-- ADICIONALES -->
+
+
+
+        <div class="option-group">
+
+
+
+            <div class="option-title">
+
+                Adicionales
+
+            </div>
+
+
+
+            <label class="option">
+
+
+
+                <span class="option-left">
+
+                    <input
+
+                        type="checkbox"
+
+                        value="Extra chocolate"
+
+                        data-extra="4"
+
+                        class="extra-option">
+
+                    Extra chocolate
+
+                </span>
+
+
+
+                <span>
+
+                    \+ S/ 4
+
+                </span>
+
+
+
+            </label>
+
+
+
+            <label class="option">
+
+
+
+                <span class="option-left">
+
+                    <input
+
+                        type="checkbox"
+
+                        value="Fresas"
+
+                        data-extra="5"
+
+                        class="extra-option">
+
+                    Fresas
+
+                </span>
+
+
+
+                <span>
+
+                    \+ S/ 5
+
+                </span>
+
+
+
+            </label>
+
+
+
+            <label class="option">
+
+
+
+                <span class="option-left">
+
+                    <input
+
+                        type="checkbox"
+
+                        value="Nueces"
+
+                        data-extra="4"
+
+                        class="extra-option">
+
+                    Nueces
+
+                </span>
+
+
+
+                <span>
+
+                    \+ S/ 4
+
+                </span>
+
+
+
+            </label>
+
+
+
+        </div>
+
+
+
+
+
+        <!-- CANTIDAD -->
+
+
+
+        <div class="quantity-selector">
+
+
+
+            <button onclick="changeModalQuantity(-1)">
+
+                −
+
+            </button>
+
+
+
+            <span
+
+                class="quantity-number"
+
+                id="modalQuantity">
+
+                1
+
+            </span>
+
+
+
+            <button onclick="changeModalQuantity(1)">
+
+                \+
+
+            </button>
+
+
+
+        </div>
+
+
+
+
+
+        <button
+
+            class="modal-add-button"
+
+            onclick="addToCart()">
+
+
+
+            Agregar al pedido
+
+
+
+        </button>
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+<!-- ======================================================
+
+     MODAL CARRITO
+
+====================================================== -->
+
+
+
+<div
+
+    class="modal-overlay"
+
+    id="cartModal">
+
+
+
+    <div class="modal">
+
+
+
+        <div class="modal-header">
+
+
+
+            <h2>
+
+                Tu pedido
+
+            </h2>
+
+
+
+            <button
+
+                class="close-button"
+
+                onclick="closeModal('cartModal')">
+
+                ×
+
+            </button>
+
+
+
+        </div>
+
+
+
+        <div id="cartItems">
+
+
+
+            <p style="color:#777;">
+
+                Tu pedido está vacío.
+
+            </p>
+
+
+
+        </div>
+
+
+
+        <div class="summary">
+
+
+
+            <div class="summary-line">
+
+
+
+                <span>
+
+                    Subtotal
+
+                </span>
+
+
+
+                <strong id="summarySubtotal">
+
+                    S/ 0.00
+
+                </strong>
+
+
+
+            </div>
+
+
+
+            <div class="summary-line">
+
+
+
+                <span>
+
+                    Delivery
+
+                </span>
+
+
+
+                <strong id="summaryDelivery">
+
+                    S/ 0.00
+
+                </strong>
+
+
+
+            </div>
+
+
+
+            <div class="summary-line summary-total">
+
+
+
+                <span>
+
+                    Total
+
+                </span>
+
+
+
+                <strong id="summaryTotal">
+
+                    S/ 0.00
+
+                </strong>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+        <!-- ENTREGA -->
+
+
+
+        <div class="form-section">
+
+
+
+            <div class="form-title">
+
+                ¿Cómo recibirás tu pedido?
+
+            </div>
+
+
+
+            <div class="delivery-options">
+
+
+
+                <label class="delivery-option">
+
+
+
+                    <input
+
+                        type="radio"
+
+                        name="delivery"
+
+                        value="Recojo"
+
+                        checked
+
+                        onchange="updateDelivery()">
+
+
+
+                    📍 Recojo en local
+
+
+
+                </label>
+
+
+
+                <label class="delivery-option">
+
+
+
+                    <input
+
+                        type="radio"
+
+                        name="delivery"
+
+                        value="Delivery"
+
+                        onchange="updateDelivery()">
+
+
+
+                    🚚 Delivery
+
+
+
+                </label>
+
+
+        </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-title">Datos para tu pedido</div>
+          <div class="form-group">
+            <label for="customerName">Nombre</label>
+            <input id="customerName" type="text" placeholder="Tu nombre" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="customerPhone">Teléfono</label>
+            <input id="customerPhone" type="tel" placeholder="Tu celular" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label for="customerNote">Nota adicional</label>
+            <textarea id="customerNote" placeholder="¿Alguna indicación para tu pedido?"></textarea>
+          </div>
+        </div>
+
+        <button class="whatsapp-order" type="button" onclick="sendOrderWhatsApp()">
+          Pedir por WhatsApp
+        </button>
+
+    </div>
+  </div>
+
+<!-- VISOR DE IMÁGENES -->
+<div class="image-lightbox" id="imageLightbox" aria-hidden="true" role="dialog" aria-label="Vista ampliada de imagen">
+  <button class="image-lightbox-close" type="button" aria-label="Cerrar" onclick="closeImageLightbox()">×</button>
+  <img src="" alt="Imagen ampliada" id="lightboxImage">
+  <div class="image-lightbox-hint">Toca fuera de la imagen para cerrar</div>
+</div>
+
+<script>
+/* ==========================================================
+   INTERACCIÓN DE IMÁGENES — CLICK / TAP PARA AMPLIAR
+   ========================================================== */
+function openImageLightbox(src, alt){
+  const box=document.getElementById('imageLightbox');
+  const img=document.getElementById('lightboxImage');
+  if(!box || !img) return;
+  img.src=src;
+  img.alt=alt || 'Imagen ampliada';
+  box.classList.add('active');
+  box.setAttribute('aria-hidden','false');
+  document.body.classList.add('lightbox-open');
+}
+function closeImageLightbox(){
+  const box=document.getElementById('imageLightbox');
+  const img=document.getElementById('lightboxImage');
+  if(!box) return;
+  box.classList.remove('active');
+  box.setAttribute('aria-hidden','true');
+  document.body.classList.remove('lightbox-open');
+  if(img) img.src='';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.product-img,.hero-image').forEach(img=>{
+    img.addEventListener('click',e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      openImageLightbox(img.currentSrc || img.src,img.alt);
+    });
+  });
+
+  const modalImg=document.getElementById('modalProductImage');
+  if(modalImg){
+    modalImg.addEventListener('click',()=>{
+      if(modalImg.src) openImageLightbox(modalImg.currentSrc || modalImg.src,modalImg.alt);
+    });
+  }
+
+  const box=document.getElementById('imageLightbox');
+  if(box){
+    box.addEventListener('click',e=>{
+      if(e.target===box) closeImageLightbox();
+    });
+  }
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape') closeImageLightbox();
+  });
+});
+
+/* ==========================================================
+   FALLBACK FUNCIONAL — mantiene la lógica del pedido si el
+   archivo entregado no incluye el JS original.
+   ========================================================== */
+let cart=[];
+let currentProduct=null;
+let modalQuantity=1;
+const products={};
+
+document.querySelectorAll('.product-card').forEach(card=>{
+  products[card.dataset.id]={
+    id:card.dataset.id,
+    name:card.dataset.name,
+    price:Number(card.dataset.price||0),
+    category:card.dataset.category,
+    image:card.querySelector('.product-img')?.src||'',
+    description:card.querySelector('.product-description')?.textContent.trim()||''
+  };
+});
+
+function openProduct(id){
+  const p=products[String(id)];
+  if(!p) return;
+  currentProduct=p;
+  modalQuantity=1;
+  const name=document.getElementById('modalProductName');
+  const image=document.getElementById('modalProductImage');
+  const desc=document.getElementById('modalProductDescription');
+  const price=document.getElementById('modalProductPrice');
+  const qty=document.getElementById('modalQuantity');
+  if(name) name.textContent=p.name;
+  if(image){image.src=p.image;image.alt=p.name;}
+  if(desc) desc.textContent=p.description;
+  if(price) price.textContent='S/ '+p.price.toFixed(2);
+  if(qty) qty.textContent='1';
+  document.querySelectorAll('#productModal input[type=radio][name=size]').forEach((r,i)=>r.checked=i===0);
+  document.querySelectorAll('#productModal .extra-option').forEach(c=>c.checked=false);
+  document.getElementById('productModal')?.classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeModal(id){
+  document.getElementById(id)?.classList.remove('active');
+  if(!document.querySelector('.modal-overlay.active')) document.body.style.overflow='';
+}
+function changeModalQuantity(delta){
+  modalQuantity=Math.max(1,modalQuantity+delta);
+  const el=document.getElementById('modalQuantity');
+  if(el) el.textContent=modalQuantity;
+}
+function selectedExtras(){
+  return [...document.querySelectorAll('#productModal .extra-option:checked')].map(x=>({name:x.value,price:Number(x.dataset.extra||0)}));
+}
+function selectedSize(){
+  const x=document.querySelector('#productModal input[name=size]:checked');
+  return x?{name:x.value,price:Number(x.dataset.extra||0)}:{name:'',price:0};
+}
+function addToCart(){
+  if(!currentProduct) return;
+  const size=selectedSize();
+  const extras=selectedExtras();
+  const extrasPrice=extras.reduce((s,x)=>s+x.price,0);
+  const unit=currentProduct.price+size.price+extrasPrice;
+  cart.push({id:Date.now(),productId:currentProduct.id,name:currentProduct.name,unit,size:size.name,extras,qty:modalQuantity});
+  updateCartUI();
+  closeModal('productModal');
+}
+function updateCartUI(){
+  const count=cart.reduce((s,x)=>s+x.qty,0);
+  const total=cart.reduce((s,x)=>s+x.unit*x.qty,0);
+  const countEl=document.getElementById('cartCount');
+  const totalEl=document.getElementById('floatingTotal');
+  if(countEl) countEl.textContent=count+' '+(count===1?'producto':'productos');
+  if(totalEl) totalEl.textContent='S/ '+total.toFixed(2);
+  renderCart();
+}
+function renderCart(){
+  const wrap=document.getElementById('cartItems');
+  if(!wrap) return;
+  if(!cart.length){wrap.innerHTML='<p style="color:#777;">Tu pedido está vacío.</p>';return;}
+  wrap.innerHTML=cart.map(item=>{
+    const details=[item.size,...item.extras.map(x=>x.name)].filter(Boolean).join(' · ');
+    return `<div class="cart-item"><div class="cart-item-top"><div><div class="cart-item-name">${escapeHTML(item.name)}</div><div class="cart-item-details">${escapeHTML(details)}</div></div><strong>S/ ${(item.unit*item.qty).toFixed(2)}</strong></div><div class="cart-item-actions"><div class="mini-quantity"><button type="button" onclick="changeCartQty(${item.id},-1)">−</button><span>${item.qty}</span><button type="button" onclick="changeCartQty(${item.id},1)">+</button></div><button class="remove-item" type="button" onclick="removeCartItem(${item.id})">Eliminar</button></div></div>`;
+  }).join('');
+  const subtotal=cart.reduce((s,x)=>s+x.unit*x.qty,0);
+  const sub=document.getElementById('summarySubtotal');
+  const total=document.getElementById('summaryTotal');
+  if(sub) sub.textContent='S/ '+subtotal.toFixed(2);
+  if(total) total.textContent='S/ '+subtotal.toFixed(2);
+}
+function changeCartQty(id,delta){
+  const item=cart.find(x=>x.id===id); if(!item) return;
+  item.qty+=delta;
+  if(item.qty<=0) cart=cart.filter(x=>x.id!==id);
+  updateCartUI();
+}
+function removeCartItem(id){cart=cart.filter(x=>x.id!==id);updateCartUI();}
+function openCart(){updateCartUI();document.getElementById('cartModal')?.classList.add('active');document.body.style.overflow='hidden';}
+function escapeHTML(str){return String(str).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function filterCategory(category,button){
+  document.querySelectorAll('.category-button').forEach(b=>b.classList.remove('active'));
+  button?.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card=>{
+    card.style.display=(category==='todos'||card.dataset.category===category)?'':'none';
+  });
+}
+function openLocation(){window.open('https://www.google.com/maps/search/?api=1&query=Lima%20Peru','_blank','noopener');}
+function contactWhatsApp(){window.open('https://wa.me/?text=Hola%20Dulce%20Capitas%2C%20quiero%20hacer%20un%20pedido.','_blank','noopener');}
+function sendOrderWhatsApp(){
+  if(!cart.length){alert('Agrega al menos un producto a tu pedido.');return;}
+  const name=document.getElementById('customerName')?.value.trim()||'';
+  const phone=document.getElementById('customerPhone')?.value.trim()||'';
+  const note=document.getElementById('customerNote')?.value.trim()||'';
+  const delivery=document.querySelector('input[name="delivery"]:checked')?.value||'Recojo';
+  const lines=cart.map(x=>{
+    const extras=[x.size,...x.extras.map(e=>e.name)].filter(Boolean).join(', ');
+    return `${x.qty} x ${x.name}${extras?' ('+extras+')':''} — S/ ${(x.unit*x.qty).toFixed(2)}`;
+  });
+  const total=cart.reduce((s,x)=>s+x.unit*x.qty,0);
+  const text=[
+    'Hola Dulce Capitas, quiero hacer este pedido:',
+    '',lines.join('\n'),'','Total: S/ '+total.toFixed(2),
+    'Entrega: '+delivery,
+    name?'Nombre: '+name:'',phone?'Teléfono: '+phone:'',note?'Nota: '+note:''
+  ].filter(Boolean).join('\n');
+  window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank','noopener');
+}
+function updateDelivery(){
+  const selected=document.querySelector('input[name="delivery"]:checked')?.value;
+  const delivery=selected==='Delivery'?0:0;
+  const el=document.getElementById('summaryDelivery'); if(el) el.textContent='S/ '+delivery.toFixed(2);
+}
+
+// Cierra modales al tocar el fondo.
+document.addEventListener('click',e=>{
+  if(e.target.classList?.contains('modal-overlay')) closeModal(e.target.id);
+});
+</script>
 </body>
 </html>
