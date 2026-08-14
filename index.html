@@ -1610,139 +1610,154 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ==========================================================
    LÓGICA FUNCIONAL DEL CARRITO Y CATÁLOGO
    ========================================================== */
-let cart=[];
-let currentProduct=null;
-let modalQuantity=1;
-const products={};
+let cart = [];
+let currentProduct = null;
+let modalQuantity = 1;
+const products = {};
 
-document.querySelectorAll('.product-card').forEach(card=>{
-  products[card.dataset.id]={
-    id:card.dataset.id,
-    name:card.dataset.name,
-    price:Number(card.dataset.price||0),
-    category:card.dataset.category,
-    image:card.querySelector('.product-img')?.src||'',
-    description:card.querySelector('.product-description')?.textContent.trim()||''
+document.querySelectorAll('.product-card').forEach(card => {
+  products[card.dataset.id] = {
+    id: card.dataset.id,
+    name: card.dataset.name,
+    price: Number(card.dataset.price || 0),
+    category: card.dataset.category,
+    image: card.querySelector('.product-img')?.src || '',
+    description: card.querySelector('.product-description')?.textContent.trim() || ''
   };
 });
 
-function openProduct(id){
-  const p=products[String(id)];
-  if(!p) return;
-  currentProduct=p;
-  modalQuantity=1;
-  const name=document.getElementById('modalProductName');
-  const image=document.getElementById('modalProductImage');
-  const desc=document.getElementById('modalProductDescription');
-  const price=document.getElementById('modalProductPrice');
-  const qty=document.getElementById('modalQuantity');
-  if(name) name.textContent=p.name;
-  if(image){image.src=p.image;image.alt=p.name;}
-  if(desc) desc.textContent=p.description;
-  if(price) price.textContent='S/ '+p.price.toFixed(2);
-  if(qty) qty.textContent='1';
-  document.querySelectorAll('#productModal input[type=radio][name=size]').forEach((r,i)=>r.checked=i===0);
-  document.querySelectorAll('#productModal .extra-option').forEach(c=>c.checked=false);
+function openProduct(id) {
+  const p = products[String(id)];
+  if (!p) return;
+  currentProduct = p;
+  modalQuantity = 1;
+  const name = document.getElementById('modalProductName');
+  const image = document.getElementById('modalProductImage');
+  const desc = document.getElementById('modalProductDescription');
+  const price = document.getElementById('modalProductPrice');
+  const qty = document.getElementById('modalQuantity');
+  if (name) name.textContent = p.name;
+  if (image) { image.src = p.image; image.alt = p.name; }
+  if (desc) desc.textContent = p.description;
+  if (price) price.textContent = 'S/ ' + p.price.toFixed(2);
+  if (qty) qty.textContent = '1';
+  document.querySelectorAll('#productModal input[type=radio][name=size]').forEach((r, i) => r.checked = i === 0);
+  document.querySelectorAll('#productModal .extra-option').forEach(c => c.checked = false);
   document.getElementById('productModal')?.classList.add('active');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
-function closeModal(id){
+
+function closeModal(id) {
   document.getElementById(id)?.classList.remove('active');
-  if(!document.querySelector('.modal-overlay.active')) document.body.style.overflow='';
+  if (!document.querySelector('.modal-overlay.active')) document.body.style.overflow = '';
 }
-function changeModalQuantity(delta){
-  modalQuantity=Math.max(1,modalQuantity+delta);
-  const el=document.getElementById('modalQuantity');
-  if(el) el.textContent=modalQuantity;
+
+function changeModalQuantity(delta) {
+  modalQuantity = Math.max(1, modalQuantity + delta);
+  const el = document.getElementById('modalQuantity');
+  if (el) el.textContent = modalQuantity;
 }
-function selectedExtras(){
-  return [...document.querySelectorAll('#productModal .extra-option:checked')].map(x=>({name:x.value,price:Number(x.dataset.extra||0)}));
+
+function selectedExtras() {
+  return [...document.querySelectorAll('#productModal .extra-option:checked')].map(x => ({ name: x.value, price: Number(x.dataset.extra || 0) }));
 }
-function selectedSize(){
-  const x=document.querySelector('#productModal input[name=size]:checked');
-  return x?{name:x.value,price:Number(x.dataset.extra||0)}:{name:'',price:0};
+
+function selectedSize() {
+  const x = document.querySelector('#productModal input[name=size]:checked');
+  return x ? { name: x.value, price: Number(x.dataset.extra || 0) } : { name: '', price: 0 };
 }
-function addToCart(){
-  if(!currentProduct) return;
-  const size=selectedSize();
-  const extras=selectedExtras();
-  const extrasPrice=extras.reduce((s,x)=>s+x.price,0);
-  const unit=currentProduct.price+size.price+extrasPrice;
-  cart.push({id:Date.now(),productId:currentProduct.id,name:currentProduct.name,unit,size:size.name,extras,qty:modalQuantity});
+
+function addToCart() {
+  if (!currentProduct) return;
+  const size = selectedSize();
+  const extras = selectedExtras();
+  const extrasPrice = extras.reduce((s, x) => s + x.price, 0);
+  const unit = currentProduct.price + size.price + extrasPrice;
+  cart.push({ id: Date.now(), productId: currentProduct.id, name: currentProduct.name, unit, size: size.name, extras, qty: modalQuantity });
   updateCartUI();
   closeModal('productModal');
 }
-function updateCartUI(){
-  const count=cart.reduce((s,x)=>s+x.qty,0);
-  const total=cart.reduce((s,x)=>s+x.unit*x.qty,0);
-  const countEl=document.getElementById('cartCount');
-  const totalEl=document.getElementById('floatingTotal');
-  if(countEl) countEl.textContent=count+' '+(count===1?'producto':'productos');
-  if(totalEl) totalEl.textContent='S/ '+total.toFixed(2);
+
+function updateCartUI() {
+  const count = cart.reduce((s, x) => s + x.qty, 0);
+  const total = cart.reduce((s, x) => s + x.unit * x.qty, 0);
+  const countEl = document.getElementById('cartCount');
+  const totalEl = document.getElementById('floatingTotal');
+  if (countEl) countEl.textContent = count + ' ' + (count === 1 ? 'producto' : 'productos');
+  if (totalEl) totalEl.textContent = 'S/ ' + total.toFixed(2);
   renderCart();
 }
-function renderCart(){
-  const wrap=document.getElementById('cartItems');
-  if(!wrap) return;
-  if(!cart.length){wrap.innerHTML='<p style="color:#777;">Tu pedido está vacío.</p>';return;}
-  wrap.innerHTML=cart.map(item=>{
-    const details=[item.size,...item.extras.map(x=>x.name)].filter(Boolean).join(' · ');
-    return `<div class="cart-item"><div class="cart-item-top"><div><div class="cart-item-name">${escapeHTML(item.name)}</div><div class="cart-item-details">${escapeHTML(details)}</div></div><strong>S/ ${(item.unit*item.qty).toFixed(2)}</strong></div><div class="cart-item-actions"><div class="mini-quantity"><button type="button" onclick="changeCartQty(${item.id},-1)">−</button><span>${item.qty}</span><button type="button" onclick="changeCartQty(${item.id},1)">+</button></div><button class="remove-item" type="button" onclick="removeCartItem(${item.id})">Eliminar</button></div></div>`;
+
+function renderCart() {
+  const wrap = document.getElementById('cartItems');
+  if (!wrap) return;
+  if (!cart.length) { wrap.innerHTML = '<p style="color:#777;">Tu pedido está vacío.</p>'; return; }
+  wrap.innerHTML = cart.map(item => {
+    const details = [item.size, ...item.extras.map(x => x.name)].filter(Boolean).join(' · ');
+    return `<div class="cart-item"><div class="cart-item-top"><div><div class="cart-item-name">${escapeHTML(item.name)}</div><div class="cart-item-details">${escapeHTML(details)}</div></div><strong>S/ ${(item.unit * item.qty).toFixed(2)}</strong></div><div class="cart-item-actions"><div class="mini-quantity"><button type="button" onclick="changeCartQty(${item.id},-1)">−</button><span>${item.qty}</span><button type="button" onclick="changeCartQty(${item.id},1)">+</button></div><button class="remove-item" type="button" onclick="removeCartItem(${item.id})">Eliminar</button></div></div>`;
   }).join('');
-  const subtotal=cart.reduce((s,x)=>s+x.unit*x.qty,0);
-  const sub=document.getElementById('summarySubtotal');
-  const total=document.getElementById('summaryTotal');
-  if(sub) sub.textContent='S/ '+subtotal.toFixed(2);
-  if(total) total.textContent='S/ '+subtotal.toFixed(2);
+  const subtotal = cart.reduce((s, x) => s + x.unit * x.qty, 0);
+  const sub = document.getElementById('summarySubtotal');
+  const total = document.getElementById('summaryTotal');
+  if (sub) sub.textContent = 'S/ ' + subtotal.toFixed(2);
+  if (total) total.textContent = 'S/ ' + subtotal.toFixed(2);
 }
-function changeCartQty(id,delta){
-  const item=cart.find(x=>x.id===id); if(!item) return;
-  item.qty+=delta;
-  if(item.qty<=0) cart=cart.filter(x=>x.id!==id);
+
+function changeCartQty(id, delta) {
+  const item = cart.find(x => x.id === id); if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(x => x.id !== id);
   updateCartUI();
 }
-function removeCartItem(id){cart=cart.filter(x=>x.id!==id);updateCartUI();}
-function openCart(){updateCartUI();document.getElementById('cartModal')?.classList.add('active');document.body.style.overflow='hidden';}
-function escapeHTML(str){return String(str).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
-function filterCategory(category,button){
-  document.querySelectorAll('.category-button').forEach(b=>b.classList.remove('active'));
+
+function removeCartItem(id) { cart = cart.filter(x => x.id !== id); updateCartUI(); }
+function openCart() { updateCartUI(); document.getElementById('cartModal')?.classList.add('active'); document.body.style.overflow = 'hidden'; }
+function escapeHTML(str) { return String(str).replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c])); }
+
+function filterCategory(category, button) {
+  document.querySelectorAll('.category-button').forEach(b => b.classList.remove('active'));
   button?.classList.add('active');
-  document.querySelectorAll('.product-card').forEach(card=>{
-    card.style.display=(category==='todos'||card.dataset.category===category)?'':'none';
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.style.display = (category === 'todos' || card.dataset.category === category) ? '' : 'none';
   });
 }
-function openLocation(){window.open('https://www.google.com/maps/search/?api=1&query=Lima%20Peru','_blank','noopener');}
-function contactWhatsApp(){window.open('https://wa.me/?text=Hola%20Dulce%20Capitas%2C%20quiero%20hacer%20un%20pedido.','_blank','noopener');}
-function sendOrderWhatsApp(){
-  if(!cart.length){alert('Agrega al menos un producto a tu pedido.');return;}
-  const name=document.getElementById('customerName')?.value.trim()||'';
-  const phone=document.getElementById('customerPhone')?.value.trim()||'';
-  const note=document.getElementById('customerNote')?.value.trim()||'';
-  const delivery=document.querySelector('input[name="delivery"]:checked')?.value||'Recojo';
-  const lines=cart.map(x=>{
-    const extras=[x.size,...x.extras.map(e=>e.name)].filter(Boolean).join(', ');
-    return `${x.qty} x ${x.name}${extras?' ('+extras+')':''} — S/ ${(x.unit*x.qty).toFixed(2)}`;
+
+function openLocation() { window.open('https://www.google.com/maps/search/?api=1&query=Lima%20Peru', '_blank', 'noopener'); }
+
+function contactWhatsApp() {
+  window.open('https://api.whatsapp.com/send?phone=51920832884&text=' + encodeURIComponent("Hola D'Corazón, quiero hacer una consulta."), '_blank', 'noopener');
+}
+
+function sendOrderWhatsApp() {
+  if (!cart.length) { alert('Agrega al menos un producto a tu pedido.'); return; }
+  const name = document.getElementById('customerName')?.value.trim() || '';
+  const phone = document.getElementById('customerPhone')?.value.trim() || '';
+  const note = document.getElementById('customerNote')?.value.trim() || '';
+  const delivery = document.querySelector('input[name="delivery"]:checked')?.value || 'Recojo';
+  const lines = cart.map(x => {
+    const extras = [x.size, ...x.extras.map(e => e.name)].filter(Boolean).join(', ');
+    return `${x.qty} x ${x.name}${extras ? ' (' + extras + ')' : ''} — S/ ${(x.unit * x.qty).toFixed(2)}`;
   });
-  const total=cart.reduce((s,x)=>s+x.unit*x.qty,0);
-  const text=[
-    'Hola Dulce Capitas, quiero hacer este pedido:',
-    '',lines.join('\n'),'','Total: S/ '+total.toFixed(2),
-    'Entrega: '+delivery,
-    name?'Nombre: '+name:'',phone?'Teléfono: '+phone:'',note?'Nota: '+note:''
+  const total = cart.reduce((s, x) => s + x.unit * x.qty, 0);
+  const text = [
+    "Hola D'Corazón, quiero hacer este pedido:",
+    '', lines.join('\n'), '', 'Total: S/ ' + total.toFixed(2),
+    'Entrega: ' + delivery,
+    name ? 'Nombre: ' + name : '', phone ? 'Teléfono: ' + phone : '', note ? 'Nota: ' + note : ''
   ].filter(Boolean).join('\n');
-  
-  // Recuerda reemplazar por tu número directo si deseas recibirlo en una cuenta específica (ej: wa.me/519XXXXXXXX)
-window.open('https://wa.me/51920832884?text=' + encodeURIComponent(text), '_blank', 'noopener');
+
+  window.open('https://api.whatsapp.com/send?phone=51920832884&text=' + encodeURIComponent(text), '_blank', 'noopener');
 }
-function updateDelivery(){
-  const selected=document.querySelector('input[name="delivery"]:checked')?.value;
-  const delivery=selected==='Delivery'?0:0;
-  const el=document.getElementById('summaryDelivery'); if(el) el.textContent='S/ '+delivery.toFixed(2);
+
+function updateDelivery() {
+  const selected = document.querySelector('input[name="delivery"]:checked')?.value;
+  const delivery = selected === 'Delivery' ? 0 : 0;
+  const el = document.getElementById('summaryDelivery'); if (el) el.textContent = 'S/ ' + delivery.toFixed(2);
 }
 
 // Cierra modales al tocar el fondo.
-document.addEventListener('click',e=>{
-  if(e.target.classList?.contains('modal-overlay')) closeModal(e.target.id);
+document.addEventListener('click', e => {
+  if (e.target.classList?.contains('modal-overlay')) closeModal(e.target.id);
 });
 </script>
 </body>
