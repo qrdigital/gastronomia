@@ -891,20 +891,16 @@ body.lightbox-open{overflow:hidden;}
 ====================================================== -->
 
 <header class="hero">
-    <!-- Imagen principal -->
-    <img
-        class="hero-image"
-        src="/gastronomia/imagengastro1.jpg"
-        alt="gastronomia">
+    <!-- Imagen principal de portada -->
+    <div class="hero-cover">
+        <img class="hero-image" src="/gastronomia/imagengastro1.jpg" alt="Portada de D' Corazón">
+    </div>
 
     <div class="container business-info">
         <div class="business-top">
-            <img
-                class="business-logo"
-                src="/gastronomia/logogastronomia.jpg"
-                alt="Logo D' Corazón">
+            <img class="business-logo" src="/gastronomia/logogastronomia.jpg" alt="Logo de D' Corazón">
 
-            <div>
+            <div class="business-details">
                 <h1 class="business-name">D' Corazón</h1>
                 <p class="business-description">
                     Tortas, postres y dulces preparados con cariño.
@@ -914,26 +910,25 @@ body.lightbox-open{overflow:hidden;}
 
         <div class="business-meta">
             <div class="meta-item">
-                🕐 Lun - Sáb 10:00 - 20:00
+                <span aria-hidden="true">🕐</span>
+                <span>Lun - Sáb 10:00 - 20:00</span>
             </div>
             <div class="meta-item">
-                📍 Lima
+                <span aria-hidden="true">📍</span>
+                <span>Lima</span>
             </div>
             <div class="meta-item">
-                🚚 Delivery
+                <span aria-hidden="true">🚚</span>
+                <span>Delivery</span>
             </div>
         </div>
 
         <div class="header-actions">
-            <button
-                class="action-button"
-                onclick="openLocation()">
-                📍 Cómo llegar
+            <button type="button" class="action-button" onclick="openLocation()">
+                <span aria-hidden="true">📍</span> Cómo llegar
             </button>
-            <button
-                class="action-button whatsapp"
-                onclick="contactWhatsApp()">
-                WhatsApp
+            <button type="button" class="action-button whatsapp" onclick="contactWhatsApp()">
+                <span aria-hidden="true">💬</span> WhatsApp
             </button>
         </div>
     </div>
@@ -1004,41 +999,41 @@ body.lightbox-open{overflow:hidden;}
 
     <div class="products-grid" id="productsGrid">
 
-        <!-- PRODUCTO 1 -->
-        <article
-            class="product-card"
-            data-category="tortas"
-            data-id="1"
-            data-name="Torta de Chocolate"
-            data-price="45">
-            <div class="product-image-wrapper">
-                <img
-                    class="product-img"
-                    <img class="product-img" src="/gastronomia/imagengastro2.jpg" alt="Torta de Chocolate">
-                    alt="Torta de Chocolate">
-                <span class="product-badge">
-                    MÁS VENDIDO
-                </span>
+       <!-- PRODUCTO 1 -->
+<article
+    class="product-card"
+    data-category="tortas"
+    data-id="1"
+    data-name="Torta de Chocolate"
+    data-price="45">
+    <div class="product-image-wrapper">
+        <img
+            class="product-img"
+            src="/gastronomia/imagengastro2.jpg"
+            alt="Torta de Chocolate">
+        <span class="product-badge">
+            MÁS VENDIDO
+        </span>
+    </div>
+    <div class="product-content">
+        <h3 class="product-name">
+            Torta de Chocolate
+        </h3>
+        <p class="product-description">
+            Bizcocho de chocolate con relleno y cobertura.
+        </p>
+        <div class="product-bottom">
+            <div class="product-price">
+                S/ 45.00
             </div>
-            <div class="product-content">
-                <h3 class="product-name">
-                    Torta de Chocolate
-                </h3>
-                <p class="product-description">
-                    Bizcocho de chocolate con relleno y cobertura.
-                </p>
-                <div class="product-bottom">
-                    <div class="product-price">
-                        S/ 45.00
-                    </div>
-                    <button
-                        class="add-button"
-                        onclick="openProduct(1)">
-                        + Agregar
-                    </button>
-                </div>
-            </div>
-        </article>
+            <button
+                class="add-button"
+                onclick="openProduct(1)">
+                + Agregar
+            </button>
+        </div>
+    </div>
+</article>
 
         <!-- PRODUCTO 2 -->
         <article
