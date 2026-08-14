@@ -923,14 +923,21 @@ body.lightbox-open{overflow:hidden;}
             </div>
         </div>
 
-        <div class="header-actions">
-            <button type="button" class="action-button" onclick="openLocation()">
-                <span aria-hidden="true">📍</span> Cómo llegar
-            </button>
-            <button type="button" class="action-button whatsapp" onclick="contactWhatsApp()">
-                <span aria-hidden="true">💬</span> WhatsApp
-            </button>
-        </div>
+   <div class="header-actions">
+    <button type="button" class="action-button" onclick="openLocation()">
+        <span aria-hidden="true">📍</span> Cómo llegar
+    </button>
+    
+    <!-- Enlace directo sin pasar por funciones JS intermedias -->
+    <a 
+        class="action-button whatsapp" 
+        href="https://api.whatsapp.com/send?phone=51920832884&text=Hola%20D%27Coraz%C3%B3n%2C%20quiero%20hacer%20una%20consulta." 
+        target="_blank" 
+        rel="noopener"
+        style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+        <span aria-hidden="true">💬</span> WhatsApp
+    </a>
+</div>
     </div>
 </header>
 
