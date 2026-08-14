@@ -1732,7 +1732,7 @@ function sendOrderWhatsApp(){
   ].filter(Boolean).join('\n');
   
   // Recuerda reemplazar por tu número directo si deseas recibirlo en una cuenta específica (ej: wa.me/519XXXXXXXX)
-  window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank','noopener');
+window.open('https://wa.me/51920832884?text=' + encodeURIComponent(text), '_blank', 'noopener');
 }
 function updateDelivery(){
   const selected=document.querySelector('input[name="delivery"]:checked')?.value;
